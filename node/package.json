@@ -1,0 +1,12 @@
+{
+  "name": "docker-compose-node-app",
+  "version": "1.0.0",
+  "description": "Node.js app with Docker Compose",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "YourName",
+  "license": "MIT"
+}
+

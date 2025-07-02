@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  node-app:
+    build: .
+    ports:
+      - "3000:3000"
+    container_name: static-node-container
+    restart: always
+

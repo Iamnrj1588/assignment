@@ -1,0 +1,32 @@
+ls	List files and folders
+ls -l	Long list with details
+cd folder/	Change directory
+cd ..	Go up one level
+pwd	Print current directory
+mkdir foldername	Create new directory
+rmdir foldername	Remove empty directory
+rm filename	Delete file
+rm -r foldername	Delete folder and contents
+touch filename	Create empty file
+cp file1 file2	Copy file
+mv file1 file2	Rename or move file
+cat file	View file content
+nano file	Open file in nano editor
+echo "text" > file	Write to file (overwrite)
+echo "text" >> file	Append to file
+
+find . -name "*.txt"	Find all .txt files
+chmod +x file.sh	Make script executable
+chmod 755 file	Set read-write-execute permission
+chown user:group file	Change ownership
+
+df -h	Show disk usage
+free -h	Show memory usage
+top	Live view of processes
+ps aux	List all processes
+uname -a	System information
+whoami	Current username
+uptime	Show how long system has been runningip a	Show IP addresses
+ping google.com	Test internet connection
+curl http://example.com	Get URL response
+netstat -tuln	Show open ports

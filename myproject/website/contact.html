@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f7f9fc;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://source.unsplash.com/1600x900/?developer,laptop') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      background: rgba(0,0,0,0.5);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .about, .skills, .projects {
+      margin-bottom: 4rem;
+    }
+
+    .skills .bar {
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .skills .bar span {
+      display: block;
+      height: 20px;
+      background: #0d6efd;
+      border-radius: 10px;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-card h3 {
+      padding: 1rem;
+    }
+
+    footer {
+      background: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Hi, I'm a DevOps Engineer</h1>
+  </section>
+
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a passionate engineer with experience in building responsive and interactive websites. I specialize in Docker, AWS, K8S, and modern technologies.
+    </p>
+  </section>
+
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <div>
+      <p>HTML</p>
+      <div class="bar"><span style="width: 95%"></span></div>
+
+      <p>CSS</p>
+      <div class="bar"><span style="width: 90%"></span></div>
+
+      <p>JavaScript</p>
+      <div class="bar"><span style="width: 85%"></span></div>
+
+      <p>React</p>
+      <div class="bar"><span style="width: 80%"></span></div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <h2>My Projects</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="https://source.unsplash.com/400x200/?website" alt="Project 1"/>
+        <h3>Portfolio Website</h3>
+      </div>
+      <div class="project-card">
+        <img src="https://source.unsplash.com/400x200/?app" alt="Project 2"/>
+        <h3>ToDo App</h3>
+      </div>
+      <div class="project-card">
+        <img src="https://source.unsplash.com/400x200/?ecommerce" alt="Project 3"/>
+        <h3>E-Commerce Template</h3>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 YourName — All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>
+
