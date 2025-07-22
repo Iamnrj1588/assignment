@@ -1,6 +1,6 @@
-projectKey=Node-sonar
+projectKey=code-scan
 serverUrl=http://localhost:9000
 serverVersion=25.6.0.109173
-dashboardUrl=http://localhost:9000/dashboard?id=Node-sonar
-ceTaskId=657f6902-c67d-4965-9da0-336c7de1e41a
-ceTaskUrl=http://localhost:9000/api/ce/task?id=657f6902-c67d-4965-9da0-336c7de1e41a
+dashboardUrl=http://localhost:9000/dashboard?id=code-scan
+ceTaskId=cbcff9b3-8743-4cb6-86f1-e9c267ff15e1
+ceTaskUrl=http://localhost:9000/api/ce/task?id=cbcff9b3-8743-4cb6-86f1-e9c267ff15e1

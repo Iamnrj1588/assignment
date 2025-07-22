@@ -1,12 +1,12 @@
 const http = require('http');
 
 const port = 3000;
-const hostname = '0.0.0.0'; // Required for Docker
+const hostname = '0.0.0.0'; // Listen on all interfaces inside container
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/html');
-  res.end('<h1>Hello from Docker Compose Node.js App!</h1>');
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello from Node.js inside Docker!\n');
 });
 
 server.listen(port, hostname, () => {
