@@ -1,32 +1,37 @@
-name: Deploy MyProject
+name: Deploy Static Website to EC2
 
 on:
   push:
     branches:
-      - main
+      - main   # Deploy when code is pushed to main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2. Setup SSH
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Copy myproject to server
+      # 3. Copy files to EC2
+      - name: Copy files to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "rm -rf ~/myproject"
-          scp -o StrictHostKeyChecking=no -r ./myproject ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/
+          rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            ./ ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:~/myproject/
 
-      - name: Run docker-compose for myproject
+      # 4. Run Docker Compose on EC2
+      - name: Run Docker Compose on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
-            cd ~/myproject && \
-            docker-compose down && \
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "
+            cd ~/myproject &&
+            docker-compose down &&
             docker-compose up -d --build
           "
