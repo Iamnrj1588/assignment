@@ -23,5 +23,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@184.169.251.147 "
             cd ~/myproject &&
             docker-compose down &&
-            docker-compose up -d --build
+            docker-compose up -d
           "
