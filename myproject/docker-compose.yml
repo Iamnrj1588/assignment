@@ -1,11 +1,10 @@
-version: "3.8"
-
 services:
-  myproject_web:
-    build: .
+  web:
+    image: nginx:alpine
     container_name: myproject_web
-    ports:
-      - "8080:80"   # Expose myproject on port 8080
     volumes:
-      - ./website:/usr/share/nginx/html
+      - .:/usr/share/nginx/html
+      - ./default.conf:/etc/nginx/conf.d/default.conf  # use your custom config
+    ports:
+      - "8080:80"
     restart: always
