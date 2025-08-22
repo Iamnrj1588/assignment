@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AspireQ – Powering the Future of Cloud Kitchens</title>
+  <meta name="description" content="AspireQ helps entrepreneurs launch and scale cloud kitchens with end‑to‑end technology, delivery integrations, growth marketing, and analytics." />
+  <meta property="og:title" content="AspireQ – Powering the Future of Cloud Kitchens" />
+  <meta property="og:description" content="Launch, operate, and scale your cloud kitchen with AspireQ's all‑in‑one platform." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1555992336-03a23c8bf4cd?auto=format&fit=crop&w=1600&q=60" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--brand:#6d28d9;--accent:#16a34a;}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    .glass{backdrop-filter:saturate(180%) blur(10px); background:rgba(255,255,255,.7)}
+    .grad{background:linear-gradient(135deg, var(--brand), #7c3aed, #0ea5e9)}
+    .chip{border:1px solid rgb(0 0 0 / .08)}
+  </style>
+</head>
+<body class="antialiased text-slate-800">
+  <!-- Top Notice -->
+  <div class="w-full grad text-white text-center text-sm py-2">
+    🚀 Now onboarding partner kitchens in Mumbai, Pune & Bengaluru – <a href="#apply" class="underline font-semibold">apply today</a>
+  </div>
+
+  <!-- Nav -->
+  <header class="sticky top-0 z-50 bg-white/90 border-b border-slate-100 backdrop-blur">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#" class="flex items-center gap-2">
+          <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl grad shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M3 12h18M12 3v18"/></svg>
+          </span>
+          <span class="font-extrabold text-xl">AspireQ</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-8 text-sm">
+          <a href="#about" class="hover:text-indigo-600">Who we are</a>
+          <a href="#services" class="hover:text-indigo-600">What we do</a>
+          <a href="#how" class="hover:text-indigo-600">How it works</a>
+          <a href="#testimonials" class="hover:text-indigo-600">Stories</a>
+          <a href="#faq" class="hover:text-indigo-600">FAQ</a>
+        </nav>
+        <div class="hidden md:flex items-center gap-3">
+          <a href="#contact" class="px-4 py-2 rounded-xl chip hover:border-indigo-300">Contact</a>
+          <a href="#apply" class="px-4 py-2 rounded-xl text-white grad shadow hover:opacity-95">Partner with us</a>
+        </div>
+        <button id="menuBtn" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg hover:bg-slate-100" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100">
+      <div class="px-4 py-3 space-y-2 text-sm">
+        <a href="#about" class="block">Who we are</a>
+        <a href="#services" class="block">What we do</a>
+        <a href="#how" class="block">How it works</a>
+        <a href="#testimonials" class="block">Stories</a>
+        <a href="#faq" class="block">FAQ</a>
+        <a href="#contact" class="block">Contact</a>
+        <a href="#apply" class="block font-semibold text-indigo-700">Partner with us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-indigo-50 to-white">
+    <div class="absolute inset-0 -z-10 opacity-30" aria-hidden="true">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1200 400"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#60a5fa"/></linearGradient></defs><circle cx="150" cy="80" r="60" fill="url(#g)"/><circle cx="1050" cy="300" r="80" fill="url(#g)"/><circle cx="650" cy="120" r="120" fill="url(#g)"/></svg>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest bg-white border border-indigo-100 text-indigo-700 px-3 py-1 rounded-full">Cloud Kitchen Platform</span>
+        <h1 class="mt-5 text-4xl md:text-5xl font-extrabold leading-tight">Launch, Operate & Scale your <span class="text-transparent bg-clip-text grad">Cloud Kitchen</span> with AspireQ</h1>
+        <p class="mt-4 text-lg text-slate-600">We provide the technology, delivery integrations, and growth engine so you can focus on creating amazing food. From setup to scale—AspireQ has your back.</p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="#apply" class="px-6 py-3 rounded-xl text-white grad shadow-lg shadow-indigo-200/70">Partner with us</a>
+          <a href="#contact" class="px-6 py-3 rounded-xl border border-slate-200 bg-white hover:border-indigo-300">Book a demo</a>
+        </div>
+        <div class="mt-8 flex items-center gap-6 text-sm text-slate-500">
+          <div class="flex items-center gap-2"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> No heavy upfront costs</div>
+          <div class="flex items-center gap-2"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg> Delivery partner integrations</div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-4 bg-gradient-to-tr from-indigo-200 to-emerald-200 blur-2xl opacity-60 -z-10 rounded-3xl"></div>
+        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=1400&q=60" alt="Cloud kitchen" class="rounded-3xl shadow-2xl w-full object-cover"/>
+        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 w-60">
+          <p class="text-xs text-slate-500">Live orders</p>
+          <div class="mt-1 font-semibold">1,248 orders this week</div>
+          <div class="mt-2 h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full w-2/3 bg-indigo-500"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust / Logos -->
+  <section class="py-10 border-t border-b border-slate-100 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm text-slate-500">Trusted by growing kitchen entrepreneurs & local brands</p>
+      <div class="mt-6 grid grid-cols-2 md:grid-cols-5 gap-6 items-center opacity-70">
+        <img src="https://dummyimage.com/180x48/edf2f7/0f172a&text=Kitchen+Co" class="mx-auto" alt="logo"/>
+        <img src="https://dummyimage.com/180x48/edf2f7/0f172a&text=Spice+Lab" class="mx-auto" alt="logo"/>
+        <img src="https://dummyimage.com/180x48/edf2f7/0f172a&text=Meal+Box" class="mx-auto" alt="logo"/>
+        <img src="https://dummyimage.com/180x48/edf2f7/0f172a&text=Chef+Nest" class="mx-auto" alt="logo"/>
+        <img src="https://dummyimage.com/180x48/edf2f7/0f172a&text=Veg+Vibe" class="mx-auto" alt="logo"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-3xl md:text-4xl font-extrabold">Who we are</h2>
+        <p class="mt-4 text-slate-600 leading-relaxed">AspireQ is a next‑gen platform enabling food entrepreneurs, home chefs, and restaurants to build digital‑first brands. We combine software, operations, and growth into one simple platform so you can start fast and scale confidently.</p>
+        <ul class="mt-6 space-y-3 text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> End‑to‑end platform: ordering, menu, pricing, delivery & payments</li>
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> Low CAPEX model with rapid go‑to‑market</li>
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> Data‑driven decisions with real‑time analytics</li>
+        </ul>
+        <div class="mt-8">
+          <a href="#apply" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-white grad shadow"><span>Become a partner</span><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="relative">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1400&q=60" alt="Team at work" class="rounded-3xl shadow-xl w-full object-cover"/>
+        <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 w-56">
+          <p class="text-xs text-slate-500">Avg. launch time</p>
+          <div class="mt-1 font-semibold">14–21 days</div>
+          <div class="mt-2 text-xs text-emerald-600">Faster go‑live with AspireQ playbooks</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center">What we do</h2>
+      <p class="mt-3 text-slate-600 text-center max-w-3xl mx-auto">Everything you need to run a cloud kitchen—from setup to scale—bundled into one powerful platform.</p>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M5 7v10a2 2 0 002 2h10a2 2 0 002-2V7"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Cloud Kitchen Setup</h3>
+          <p class="mt-2 text-slate-600">Guided setup with SOPs, equipment lists, and vendor connects for a fast, compliant launch.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4zM4 14h10v6H4z"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Ordering Platform</h3>
+          <p class="mt-2 text-slate-600">Branded web ordering, menu & pricing control, coupons, and live order tracking.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h6l3 3 3-6h6"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Delivery Integrations</h3>
+          <p class="mt-2 text-slate-600">Plug‑and‑play tie‑ups with logistics partners for fast, reliable deliveries.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Growth & Marketing</h3>
+          <p class="mt-2 text-slate-600">Campaigns, influencer tie‑ups, SEO/SEM, and CRM to build loyal customers.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18M8 21h8M12 3v18"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Payments & Payouts</h3>
+          <p class="mt-2 text-slate-600">Secure payments, automated settlements, GST-compliant invoicing and reports.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <div class="h-10 w-10 rounded-xl bg-indigo-600/10 flex items-center justify-center text-indigo-600">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 13h4l3 3 4-6 3 3h4"/></svg>
+          </div>
+          <h3 class="mt-4 font-semibold text-lg">Analytics & Support</h3>
+          <p class="mt-2 text-slate-600">Real‑time dashboards, item performance, NPS, and 7‑day success team support.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center">How it works</h2>
+      <div class="mt-12 grid md:grid-cols-4 gap-6">
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="text-xs text-slate-500">Step 1</div>
+          <h3 class="font-semibold mt-1">Apply</h3>
+          <p class="mt-2 text-slate-600">Tell us about your cuisine, location, and goals. We review within 48 hours.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="text-xs text-slate-500">Step 2</div>
+          <h3 class="font-semibold mt-1">Setup</h3>
+          <p class="mt-2 text-slate-600">We finalize menus, pricing, and kitchen readiness with our SOPs.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="text-xs text-slate-500">Step 3</div>
+          <h3 class="font-semibold mt-1">Go Live</h3>
+          <p class="mt-2 text-slate-600">Your brand appears on AspireQ ordering with delivery integrations enabled.</p>
+        </div>
+        <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6">
+          <div class="text-xs text-slate-500">Step 4</div>
+          <h3 class="font-semibold mt-1">Scale</h3>
+          <p class="mt-2 text-slate-600">Use analytics, campaigns, and multi‑location expansion to grow revenue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits / KPIs -->
+  <section class="py-16 md:py-24 bg-gradient-to-b from-white to-indigo-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="text-3xl font-extrabold">30–50%</div>
+        <p class="text-slate-600">Faster time‑to‑market with our launch playbooks</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="text-3xl font-extrabold">20%+</div>
+        <p class="text-slate-600">Avg. uplift in repeat orders with CRM & campaigns</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="text-3xl font-extrabold">24×7</div>
+        <p class="text-slate-600">Dashboard & support for your operations</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product / Platform Preview -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+      <div class="order-2 lg:order-1">
+        <h2 class="text-3xl md:text-4xl font-extrabold">All‑in‑one platform</h2>
+        <p class="mt-4 text-slate-600">From storefront to settlements—AspireQ centralizes your operations. Edit menus in seconds, run promo codes, track live orders, and monitor payouts from a clean, mobile‑friendly dashboard.</p>
+        <ul class="mt-6 space-y-2 text-slate-700">
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> Branded storefront + WhatsApp ordering</li>
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> Order routing & courier allocation</li>
+          <li class="flex items-start gap-3"><span class="mt-1"><svg class="h-5 w-5 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4 4L19 7"/></svg></span> Inventory & item‑wise profitability</li>
+        </ul>
+      </div>
+      <div class="order-1 lg:order-2 relative">
+        <div class="absolute -inset-4 bg-indigo-200 blur-2xl opacity-40 -z-10 rounded-3xl"></div>
+        <img class="rounded-3xl shadow-2xl w-full object-cover" src="https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=1400&q=60" alt="AspireQ Dashboard" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center">Success stories</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <figure class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <blockquote class="text-slate-700">“AspireQ helped us launch in 2 weeks and hit 1,000+ monthly orders by month two.”</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Riya, Founder at SpiceLab</figcaption>
+        </figure>
+        <figure class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <blockquote class="text-slate-700">“The dashboard and CRM brought our repeat rate above 35%. Super smooth.”</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Kabir, Chef‑Owner at MealBox</figcaption>
+        </figure>
+        <figure class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+          <blockquote class="text-slate-700">“Delivery integrations were plug‑and‑play. We focus on food; AspireQ does the rest.”</blockquote>
+          <figcaption class="mt-4 text-sm text-slate-500">— Fatima, Co‑founder at VegVibe</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="py-16 bg-gradient-to-tr from-indigo-600 to-blue-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+      <h2 class="text-3xl md:text-4xl font-extrabold">Ready to start your cloud kitchen?</h2>
+      <p class="mt-3 text-white/80">Join AspireQ and launch your brand with lower CAPEX, faster.</p>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="#apply" class="px-6 py-3 rounded-xl bg-white text-indigo-700 font-semibold">Apply now</a>
+        <a href="#contact" class="px-6 py-3 rounded-xl border border-white/30">Talk to an expert</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 md:py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center">Frequently asked questions</h2>
+      <div class="mt-10 grid md:grid-cols-2 gap-6">
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <h3 class="font-semibold">Do I need a physical storefront?</h3>
+          <p class="mt-2 text-slate-600">No. AspireQ is designed for delivery‑first brands. We help you operate efficiently without dine‑in space.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <h3 class="font-semibold">How fast can I go live?</h3>
+          <p class="mt-2 text-slate-600">Most partners launch in 2–3 weeks depending on compliance and kitchen readiness.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <h3 class="font-semibold">Do you handle delivery?</h3>
+          <p class="mt-2 text-slate-600">We integrate with 3rd‑party logistics partners and route orders automatically.</p>
+        </div>
+        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <h3 class="font-semibold">What are the fees?</h3>
+          <p class="mt-2 text-slate-600">We offer transparent, usage‑based pricing with optional add‑ons. Talk to our team for a custom plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apply / Contact -->
+  <section id="apply" class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl border border-slate-100 shadow-sm p-8 md:p-10">
+        <div class="md:flex md:items-start md:justify-between">
+          <div>
+            <h2 class="text-3xl font-extrabold">Partner with AspireQ</h2>
+            <p class="mt-2 text-slate-600">Fill this form and our partnerships team will reach out within 48 hours.</p>
+          </div>
+          <div class="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">Open for onboarding</div>
+        </div>
+
+        <form id="applyForm" class="mt-6 grid md:grid-cols-2 gap-4">
+          <div class="col-span-2 md:col-span-1">
+            <label class="text-sm font-medium">Full name</label>
+            <input type="text" required class="mt-1 w-full rounded-xl border-slate-200 focus:border-indigo-400 focus:ring-indigo-400" placeholder="Your name"/>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="text-sm font-medium">Email</label>
+            <input type="email" required class="mt-1 w-full rounded-xl border-slate-200 focus:border-indigo-400 focus:ring-indigo-400" placeholder="you@example.com"/>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="text-sm font-medium">Phone</label>
+            <input type="tel" required class="mt-1 w-full rounded-xl border-slate-200 focus:border-indigo-400 focus:ring-indigo-400" placeholder="+91"/>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <label class="text-sm font-medium">City</label>
+            <input type="text" required class="mt-1 w-full rounded-xl border-slate-200 focus:border-indigo-400 focus:ring-indigo-400" placeholder="Your city"/>
+          </div>
+          <div class="col-span-2">
+            <label class="text-sm font-medium">Tell us about your cuisine / brand</label>
+            <textarea rows="4" required class="mt-1 w-full rounded-xl border-slate-200 focus:border-indigo-400 focus:ring-indigo-400" placeholder="e.g., North Indian thali, biryani brand, healthy bowls"></textarea>
+          </div>
+          <div class="col-span-2 flex items-center gap-3">
+            <input id="agree" type="checkbox" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500" required />
+            <label for="agree" class="text-sm text-slate-600">I agree to AspireQ's terms and privacy policy.</label>
+          </div>
+          <div class="col-span-2">
+            <button type="submit" class="w-full md:w-auto px-6 py-3 rounded-xl text-white grad shadow">Submit application</button>
+            <span id="formMsg" class="ml-3 text-sm text-emerald-700 hidden">Thanks! We'll reach you within 48 hours.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer -->
+  <section id="contact" class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-extrabold">Contact us</h2>
+        <p class="mt-2 text-slate-600">Partnerships, press or careers—write to us and we’ll get back soon.</p>
+        <div class="mt-4 grid sm:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+            <div class="font-semibold">Email</div>
+            <div class="text-slate-600">abhijit.p@aspireq.com</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+            <div class="font-semibold">Phone</div>
+            <div class="text-slate-600">+91 9890694474</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+            <div class="font-semibold">HQ</div>
+            <div class="text-slate-600">Mumbai, Maharashtra, India</div>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-50 border border-slate-100">
+            <div class="font-semibold">Careers</div>
+            <div class="text-slate-600">We’re hiring across product, ops & growth</div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-1">
+        <div class="rounded-2xl p-6 border border-slate-100 bg-gradient-to-br from-indigo-50 to-white">
+          <h3 class="font-semibold">Merchant resources</h3>
+          <ul class="mt-3 space-y-2 text-sm text-slate-700">
+            <li><a class="underline" href="#">Onboarding guide (PDF)</a></li>
+            <li><a class="underline" href="#">Menu engineering 101</a></li>
+            <li><a class="underline" href="#">Packaging & food safety</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <footer class="mt-10 border-t border-slate-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-slate-500">© <span id="year"></span> AspireQ Technologies Pvt. Ltd. All rights reserved.</div>
+        <div class="flex items-center gap-5 text-sm">
+          <a href="#" class="text-slate-500 hover:text-indigo-600">Terms</a>
+          <a href="#" class="text-slate-500 hover:text-indigo-600">Privacy</a>
+          <a href="#" class="text-slate-500 hover:text-indigo-600">Merchant Login</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click',()=>{
+      const m=document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
+    });
+    // Fake form submit
+    document.getElementById('applyForm').addEventListener('submit',function(e){
+      e.preventDefault();
+      document.getElementById('formMsg').classList.remove('hidden');
+      this.reset();
+    });
+    // Year
+    document.getElementById('year').textContent=new Date().getFullYear();
+  </script>
+</body>
+</html>
