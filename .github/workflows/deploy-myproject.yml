@@ -1,0 +1,32 @@
+name: Deploy MyProject
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Copy myproject to server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "rm -rf ~/myproject"
+          scp -o StrictHostKeyChecking=no -r ./myproject ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/
+
+      - name: Run docker-compose for myproject
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "
+            cd ~/myproject && \
+            docker-compose down && \
+            docker-compose up -d --build
+          "
