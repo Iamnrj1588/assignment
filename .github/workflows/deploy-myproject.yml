@@ -24,7 +24,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v2
         with:
           args: >
-            -Dsonar.projectKey=iamnrj1588
+            -Dsonar.projectKey=iamnrj_1588
             -Dsonar.organization=Iamnrj1588
             -Dsonar.sources=.
             -Dsonar.branch.name=main
