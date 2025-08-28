@@ -25,7 +25,7 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=iamnrj_1588
-            -Dsonar.organization=Iamnrj1588
+            -Dsonar.organization=iamnrj1588
             -Dsonar.sources=.
             -Dsonar.branch.name=main
         env:
