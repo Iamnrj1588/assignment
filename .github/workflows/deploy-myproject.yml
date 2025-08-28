@@ -1,27 +1,31 @@
-name: Deploy to EC2
+name: CI with SonarCloud
 
 on:
   push:
-    branches:
-      - main   # change to your branch
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Start SSH Agent
-        uses: webfactory/ssh-agent@v0.8.0
+      - name: Set up JDK 17  # required by sonar scanner
+        uses: actions/setup-java@v4
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          distribution: temurin
+          java-version: 17
 
-      - name: Deploy to EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@184.169.251.147 "
-            cd ~/myproject &&
-            docker-compose down &&
-            docker-compose up -d
-          "
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=<your_project_key>
+            -Dsonar.organization=<your_org_name>
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
