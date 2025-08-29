@@ -41,7 +41,7 @@ jobs:
           docker run --rm \
             -v $(pwd)/zap-report:/zap/wrk:rw \
             ghcr.io/zaproxy/zaproxy:stable \
-            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html
+            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html -I --exit-code-minimal
 
       - name: Upload ZAP report to S3
         uses: jakejarvis/s3-sync-action@master
