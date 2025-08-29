@@ -1,4 +1,4 @@
-name: CI with SonarCloud
+name: CI with SonarCloud, OWASP ZAP and Report Email
 
 on:
   push:
@@ -20,6 +20,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      # ---- SonarCloud Scan ----
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
@@ -31,3 +32,45 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+
+      # ---- Run OWASP ZAP baseline scan ----
+      - name: Run OWASP ZAP scan
+        run: |
+          docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
+            -t http://184.169.251.147:8082 \
+            -r zap_report.html
+          ls -lh zap_report.html
+
+      # ---- Upload report to S3 ----
+      - name: Upload OWASP ZAP Report to S3
+        uses: aws-actions/s3-sync@v1
+        with:
+          args: --exact-timestamps
+          bucket: niraj-1588
+          source-dir: .
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+
+      # ---- Send email with S3 link ----
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "OWASP ZAP Security Report"
+          to: niraj.d@aspireq.in
+          from: "DevOps Pipeline <${{ secrets.SMTP_USERNAME }}>"
+          body: |
+            Hello Manager,
+
+            The latest OWASP ZAP security scan is completed.
+            You can download the report here:
+
+            https://niraj-1588.s3.amazonaws.com/zap_report.html
+
+            Regards,
+            DevOps Pipeline
