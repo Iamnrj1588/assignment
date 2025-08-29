@@ -1,33 +1,41 @@
-name: Deploy MyProject
+name: CI Security Scan
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  security-scan:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+      - name: Set up JDK 17  # required by sonar scanner
+        uses: actions/setup-java@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+          distribution: temurin
+          java-version: 17
 
-      # ❌ OLD ZAP SCAN step (remove it)
-      # - name: Run ZAP Scan
-      #   uses: aws-actions/s3-sync-action@v0.5.1   <-- this was wrong
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          args: >
+            -Dsonar.projectKey=iamnrj_1588
+            -Dsonar.organization=iamnrj1588
+            -Dsonar.sources=.
+            -Dsonar.branch.name=main
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
-      # ✅ REPLACE WITH THIS
-      - name: Run OWASP ZAP Scan
+       - name: Run OWASP ZAP Scan
         run: |
           mkdir -p zap-report
+          chmod 777 zap-report   # give write permission to container
           docker run --rm \
             -v $(pwd)/zap-report:/zap/wrk:rw \
             ghcr.io/zaproxy/zaproxy:stable \
