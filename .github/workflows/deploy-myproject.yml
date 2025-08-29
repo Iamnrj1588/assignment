@@ -1,13 +1,4 @@
-name: CI with Sonar + OWASP ZAP + S3 + Email
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:name: CI Security Scan
+name: Deploy MyProject
 
 on:
   push:
@@ -15,7 +6,7 @@ on:
       - main
 
 jobs:
-  zap_scan:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,8 +18,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1   # change if needed
+          aws-region: ap-south-1
 
+      # ❌ OLD ZAP SCAN step (remove it)
+      # - name: Run ZAP Scan
+      #   uses: aws-actions/s3-sync-action@v0.5.1   <-- this was wrong
+
+      # ✅ REPLACE WITH THIS
       - name: Run OWASP ZAP Scan
         run: |
           mkdir -p zap-report
@@ -45,64 +41,5 @@ jobs:
           AWS_S3_BUCKET: niraj-1588
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'ap-south-1'   # change if needed
+          AWS_REGION: 'ap-south-1'
           SOURCE_DIR: zap-report
-
-      - name: Send report via email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "OWASP ZAP Scan Report"
-          to: manager@example.com
-          from: "DevOps Pipeline <${{ secrets.EMAIL_USERNAME }}>"
-          body: "The OWASP ZAP Scan report is available at: https://niraj-1588.s3.ap-south-1.amazonaws.com/zap_report.html"
-
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1. Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 2. Set up JDK 17 (required by Sonar)
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-
-      # 3. SonarCloud Scan
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        with:
-          args: >
-            -Dsonar.projectKey=iamnrj_1588
-            -Dsonar.organization=iamnrj1588
-            -Dsonar.sources=.
-            -Dsonar.branch.name=main
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarcloud.io
-
-      # 4. Run OWASP ZAP Baseline Scan
-      - name: Run OWASP ZAP Scan
-        run: |
-          mkdir zap-report
-          docker run --rm -v $(pwd)/zap-report:/zap/wrk \
-            ghcr.io/zaproxy/zaproxy:stable \
-            zap-baseline.py -t http://184.169.251.147:8082 -r zap_report.html
-
-           # 5. Upload ZAP Report to S3
-      - name: Upload ZAP report to S3
-        uses: jakejarvis/s3-sync-action@v0.5.1
-        with:
-          args: --acl public-read --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          SOURCE_DIR: 'zap-report'
