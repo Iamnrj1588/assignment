@@ -1,12 +1,55 @@
-version: '3.8'
+name: CI Security + Sonar Scan
 
-services:
-  web:
-    image: nginx:alpine
-    container_name: myproject_web
-    ports:
-      - "8080:80"
-    volumes:
-      - ./default.conf:/etc/nginx/conf.d/default.conf
-      - ./:/usr/share/nginx/html
-    restart: always
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  build_and_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout source code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup JDK (needed for SonarQube scanner)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # SonarQube Scan
+      - name: SonarQube Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+      # Run OWASP ZAP Scan
+      - name: Run OWASP ZAP Scan
+        run: |
+          mkdir -p zap-report
+          chmod 777 zap-report
+          docker run --rm \
+            -v $(pwd)/zap-report:/zap/wrk:rw \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html
+
+      # Upload ZAP report to AWS S3
+      - name: Upload ZAP Report to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: "ap-south-1"
+          SOURCE_DIR: "zap-report"
