@@ -7,7 +7,59 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build:name: CI Security Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zap_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1   # change if needed
+
+      - name: Run OWASP ZAP Scan
+        run: |
+          mkdir -p zap-report
+          docker run --rm \
+            -v $(pwd)/zap-report:/zap/wrk:rw \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html
+
+      - name: Upload ZAP report to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: niraj-1588
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'ap-south-1'   # change if needed
+          SOURCE_DIR: zap-report
+
+      - name: Send report via email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "OWASP ZAP Scan Report"
+          to: manager@example.com
+          from: "DevOps Pipeline <${{ secrets.EMAIL_USERNAME }}>"
+          body: "The OWASP ZAP Scan report is available at: https://niraj-1588.s3.ap-south-1.amazonaws.com/zap_report.html"
+
     runs-on: ubuntu-latest
 
     steps:
