@@ -1,54 +1,55 @@
-name: CI Security + Sonar Scan
+name: CI Security Scan
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-    build_and_scan:
+  security-scan:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout source code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup JDK (needed for SonarQube scanner)
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+      - name: Set up JDK 17  # required by sonar scanner
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
 
-      # SonarQube Scan
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
         with:
-    args: >
-       -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-       -Dsonar.organization=${{ secrets.SONAR_ORG }}
-       -Dsonar.host.url=https://sonarcloud.io
-       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          args: >
+            -Dsonar.projectKey=iamnrj_1588
+            -Dsonar.organization=iamnrj1588
+            -Dsonar.sources=.
+            -Dsonar.branch.name=main
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
 
-      # Run OWASP ZAP Scan
       - name: Run OWASP ZAP Scan
         run: |
           mkdir -p zap-report
-          chmod 777 zap-report
+          chmod 777 zap-report   # give write permission to container
           docker run --rm \
             -v $(pwd)/zap-report:/zap/wrk:rw \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html
 
-      # Upload ZAP report to AWS S3
-      - name: Upload ZAP Report to S3
+      - name: Upload ZAP report to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_S3_BUCKET: niraj-1588
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: "ap-south-1"
-          SOURCE_DIR: "zap-report"
+          AWS_REGION: ap-south-1
+          SOURCE_DIR: zap-report
