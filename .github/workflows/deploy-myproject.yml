@@ -1,4 +1,4 @@
-name: CI with SonarCloud, OWASP ZAP and Report Email
+name: CI with Sonar + OWASP ZAP + S3 + Email
 
 on:
   push:
@@ -11,16 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17  # required by sonar scanner
+      # 2. Set up JDK 17 (required by Sonar)
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
-      # ---- SonarCloud Scan ----
+      # 3. SonarCloud Scan
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
         with:
@@ -33,44 +35,20 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
 
-      # ---- Run OWASP ZAP baseline scan ----
-      - name: Run OWASP ZAP scan
+      # 4. Run OWASP ZAP Baseline Scan
+      - name: Run OWASP ZAP Scan
         run: |
-          docker run --rm -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-stable zap-baseline.py \
-            -t http://184.169.251.147:8082 \
-            -r zap_report.html
-          ls -lh zap_report.html
+          mkdir zap-report
+          docker run --rm -v $(pwd)/zap-report:/zap/wrk \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t http://184.169.251.147:8082 -r zap_report.html
 
-      # ---- Upload report to S3 ----
-      - name: Upload OWASP ZAP Report to S3
+      # 5. Upload ZAP Report to S3
+      - name: Upload ZAP Report to S3
         uses: aws-actions/s3-sync@v1
         with:
-          args: --exact-timestamps
-          bucket: niraj-1588
-          source-dir: .
+          args: --acl public-read --follow-symlinks
         env:
+          AWS_S3_BUCKET: niraj-1588
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-
-      # ---- Send email with S3 link ----
-      - name: Send Email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "OWASP ZAP Security Report"
-          to: niraj.d@aspireq.in
-          from: "DevOps Pipeline <${{ secrets.SMTP_USERNAME }}>"
-          body: |
-            Hello Manager,
-
-            The latest OWASP ZAP security scan is completed.
-            You can download the report here:
-
-            https://niraj-1588.s3.amazonaws.com/zap_report.html
-
-            Regards,
-            DevOps Pipeline
