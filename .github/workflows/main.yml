@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build_and_scan:
+    build_and_scan:
     runs-on: ubuntu-latest
 
     steps:
