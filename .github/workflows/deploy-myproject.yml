@@ -10,7 +10,7 @@ jobs:
   security-scan:
     runs-on: ubuntu-latest
 
-steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -32,14 +32,17 @@ steps:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
 
-       - name: Run OWASP ZAP Scan
+      - name: Run OWASP ZAP Scan
         run: |
           mkdir -p zap-report
-          chmod 777 zap-report   # give write permission to container
+          chmod 777 zap-report
           docker run --rm \
             -v $(pwd)/zap-report:/zap/wrk:rw \
             ghcr.io/zaproxy/zaproxy:stable \
-            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html
+            zap-full-scan.py \
+              -t http://184.169.251.147:8082 \
+              -r zap_report.html \
+              -I
 
       - name: Upload ZAP report to S3
         uses: jakejarvis/s3-sync-action@master
@@ -49,5 +52,5 @@ steps:
           AWS_S3_BUCKET: niraj-1588
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'ap-south-1'
+          AWS_REGION: ap-south-1
           SOURCE_DIR: zap-report
