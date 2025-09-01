@@ -34,16 +34,19 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
 
-      - name: Run OWASP ZAP Scan
-        run: |
+       - name: Run OWASP ZAP Scan
+          run: |
           mkdir -p zap-report
-          chmod 777 zap-report   # give write permission to container
+          chmod 777 zap-report
           docker run --rm \
             -v $(pwd)/zap-report:/zap/wrk:rw \
             ghcr.io/zaproxy/zaproxy:stable \
-            zap-full-scan.py -t http://184.169.251.147:8082 -r zap_report.html -I --exit-code-minimal
+            zap-full-scan.py \
+            -t http://184.169.251.147:8082 \
+            -r zap_report.html \
+            -I
 
-      - name: Upload ZAP report to S3
+    - name: Upload ZAP report to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
