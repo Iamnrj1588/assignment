@@ -64,7 +64,7 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: "CI Security Scan Reports - GitHub Actions"
           to: niraj.d@aspireq.in
-          from: DevOps CI <${{ secrets.MAIL_USERNAME }}>
+          from: ${{ secrets.MAIL_USERNAME }}>
           secure: true
           attachments: |
             zap-report/zap_report.html
