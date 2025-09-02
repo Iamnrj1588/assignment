@@ -54,3 +54,17 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ap-south-1
           SOURCE_DIR: zap-report
+
+      - name: Send Security Reports via Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "CI Security Scan Reports - GitHub Actions"
+          to: niraj.d@aspireq.in
+          from: DevOps CI <${{ secrets.MAIL_USERNAME }}>
+          secure: true
+          attachments: |
+            zap-report/zap_report.html
