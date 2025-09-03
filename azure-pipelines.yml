@@ -1,0 +1,88 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  SONARQUBE_SERVICE: 'MySonarQube'   # Service connection name in Azure DevOps
+  SONAR_PROJECT_KEY: 'Node application'
+  SONAR_REPORT: 'sonar-report.json'
+  ZAP_REPORT: 'zap_report.html'
+  AZURE_STORAGE_ACCOUNT: 'yourstorageaccount'
+  AZURE_CONTAINER: 'scanreports'
+  EMAIL_RECIPIENTS: 'mayur.y@aspireq.in,abhijit.p@aspireq.in'
+
+steps:
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
+
+  - task: GitClone@1
+    inputs:
+      repository: 'https://github.com/Yogeshnagre00/Cloud_Kitchen.git'
+      branch: 'main'
+    displayName: 'Checkout Code'
+
+  # Run SonarQube Scan
+  - task: SonarQubePrepare@5
+    inputs:
+      SonarQube: '$(SONARQUBE_SERVICE)'
+      scannerMode: 'CLI'
+      configMode: 'manual'
+      cliProjectKey: '$(SONAR_PROJECT_KEY)'
+      cliSources: '.'
+
+  - task: SonarQubeAnalyze@5
+
+  - task: SonarQubePublish@5
+    inputs:
+      pollingTimeoutSec: '300'
+
+  # Export Sonar Issues as JSON
+  - script: |
+      curl -u $(SONARQUBE_TOKEN): "http://<your-sonarqube-url>/api/issues/search?projectKeys=$(SONAR_PROJECT_KEY)" > $(SONAR_REPORT)
+    displayName: 'Export SonarQube Report'
+
+  # Run OWASP ZAP Baseline Scan
+  - script: |
+      docker run -v $(System.DefaultWorkingDirectory):/zap/wrk/:rw \
+        ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
+        -t http://<your-azure-vm-ip>:8000 \
+        -r $(ZAP_REPORT) -m 5
+    displayName: 'Run OWASP ZAP Scan'
+
+  # Upload ZAP report to Azure Blob Storage
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: 'MyAzureConnection'   # Service connection to Azure
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az storage blob upload \
+          --account-name $(AZURE_STORAGE_ACCOUNT) \
+          --container-name $(AZURE_CONTAINER) \
+          --name $(ZAP_REPORT) \
+          --file $(ZAP_REPORT) \
+          --auth-mode key
+    displayName: 'Upload ZAP Report to Azure Blob'
+
+  # Send Email Notification
+  - task: Mailer@1
+    inputs:
+      subject: 'Code Scan Report: SonarQube + OWASP ZAP'
+      body: |
+        Hi Team,
+
+        ✅ Static and dynamic scans completed successfully.
+
+        🔍 SonarQube Report: Attached ($(SONAR_REPORT))
+        🛡️ OWASP ZAP Report: Attached ($(ZAP_REPORT))
+        ☁️ ZAP report stored in Azure Blob Storage: https://$(AZURE_STORAGE_ACCOUNT).blob.core.windows.net/$(AZURE_CONTAINER)/$(ZAP_REPORT)
+
+        Regards,
+        Azure DevOps Pipeline
+      to: '$(EMAIL_RECIPIENTS)'
+      attachments: '$(SONAR_REPORT),$(ZAP_REPORT)'
+    displayName: 'Send Email'
